@@ -1,0 +1,28 @@
+{% extends 'mainapp/base.html' %}
+{% block content %}
+<form action="" method="GET">
+  <select name="sort_by" id="">
+    <option value="up" {% if user_filter_state == 'up' %} selected {% endif %}>по возрастанию </option>
+    <option value="down" {% if user_filter_state == 'down' %} selected {% endif %}> по убыванию </option>
+  </select>
+<input type="submit" value="отфильтровать"> 
+</form>
+{% autoescape off %}
+  {% for i in articles %}
+  <h2>
+    <a href="{% url 'articleapp:view_art' i.id %}">
+      {{ i.title }}
+    </a>
+   
+  </h2>
+  <h3>
+    {{ i.prememo }} 
+  </h3>
+  {% if i.image %}
+  <img src="  {{ i.image.url }} " alt="" >
+
+
+  {% endif %}
+  {% endfor %}
+  {% endautoescape %}
+{% endblock %}
